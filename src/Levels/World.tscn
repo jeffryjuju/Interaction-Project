@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/InteractionComponents/Coffee.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/InteractionComponents/Chest.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/InteractionComponents/Npc.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/DialogueBox/DialogueBox.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GradientTexture" id=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1027.42, 0.524511 )
+
+[node name="World" type="Node2D"]
+position = Vector2( -2.3327, 5.83173 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 511.296, 559.23 )
+scale = Vector2( 1, 50 )
+texture = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+shape = SubResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 589.819, 330.352 )
+
+[node name="Coffee" parent="." instance=ExtResource( 2 )]
+position = Vector2( 465.621, 509.656 )
+
+[node name="Chest" parent="." instance=ExtResource( 3 )]
+position = Vector2( 745.934, 508.92 )
+
+[node name="Npc" parent="." instance=ExtResource( 4 )]
+position = Vector2( 323.568, 505.414 )
+scale = Vector2( 0.240001, 0.240001 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="CanvasLayer" instance=ExtResource( 5 )]
+interaction_component_nodepath = NodePath("../../Npc")
+dialogue_file_path = "res://src/Data/test_conversation.json"
